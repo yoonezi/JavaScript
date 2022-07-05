@@ -1,0 +1,12 @@
+/* 시작화면과 문재화면의 공통점인 article로 시작하니 .start를 article 로 변경 */
+article {
+    /* article 부모를 꽉 채우는 버튼 만들기 */
+    display: flex;
+    /* 정렬을 세로로 */
+    flex-direction: column;
+}
+
+.question { 
+    /* 첫 화면에 안보이게 됨 */
+    display: none;
+}
