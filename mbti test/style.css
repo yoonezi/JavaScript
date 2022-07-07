@@ -10,3 +10,7 @@ article {
     /* 첫 화면에 안보이게 됨 */
     display: none;
 }
+
+.result {
+    display: none;
+}
