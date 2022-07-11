@@ -31,9 +31,9 @@
         <button id="B" type="button" class="btn btn-light mt-5">Light</button>
     </article>
     <article class="result"">
-        <img id="img" scr="" alt="">
-        <h2 id="animal">동물이름</h2>
-        <h3 id="explain">설명</h3>
+        <img id="img" class="rounded-circle mt-5" src ="lion.jpg" alt="animal">
+        <h2 id="animal" class="text-center mt-5">동물이름</h2>
+        <h3 id="explain" class="text-center mt-5" >설명</h3>
     </article>
     <!-- 점수가 보이면 불편하니 숨기기 -->
     <input type="hidden" id="EI" value="0">
@@ -53,12 +53,17 @@
             4: {"title":"문제 4번", "type":"SN","A":"S", "B":"N"},
             5: {"title":"문제 5번", "type":"SN","A":"S", "B":"N"},
             6: {"title":"문제 6번", "type":"SN","A":"S", "B":"N"},
-            7: {"title":"문제 7번", "type":"FT","A":"F", "B":"T"},
-            8: {"title":"문제 8번", "type":"FT","A":"F", "B":"T"},
-            9: {"title":"문제 9번", "type":"FT","A":"F", "B":"T"},
+            7: {"title":"문제 7번", "type":"TF","A":"T", "B":"F"},
+            8: {"title":"문제 8번", "type":"TF","A":"T", "B":"F"},
+            9: {"title":"문제 9번", "type":"TF","A":"T", "B":"F"},
             10: {"title":"문제 10번", "type":"JP","A":"J", "B":"P"},
             11: {"title":"문제 11번", "type":"JP","A":"J", "B":"P"},
             12: {"title":"문제 12번", "type":"JP","A":"J", "B":"P"}
+        }
+        var result = {
+            "ISTJ" : {"animal":"하마", "explain":"하마 설명", "img":"lion.jpg" },
+            "ENFP" : {"animal":"사자", "explain":"사자 설명", "img":"lion.jpg" },
+            "ENTJ" : {"animal":"호랑이", "explain":"호랑이 설명", "img":"lion.jpg" }
         }
         function start() {
             // jQuery문법 , class를 나타내는 . , article 전체를 감싸는 부모태그를 선택하는 것이 됨  
@@ -79,18 +84,27 @@
         // 다음 문제로 넘어가는 함수
         function next() {
             // attr() 은 태그의 속성을 바꿔줌 
-            if (num == 13) {
+            if (num == 13)  {
                 $(".question").hide();
                 $(".result").show(); 
+                var mbti = "";
+                ($("#EI").val() < 2) ?  mbti += "I" : mbti += "E" ;
+                ($("#SN").val() < 2) ?  mbti += "N" : mbti += "S" ;
+                ($("#TF").val() < 2) ?  mbti += "F" : mbti += "T" ;
+                ($("#JP").val() < 2) ?  mbti += "P" : mbti += "J" ;
+                alert(mbti);
+                $("#img").attr("src",result[mbti]["img"]);
+                $("#animal").html(result[mbti]["animal"]);
+                $("#explain").html(result[mbti]["explain"]);
+            } else {
+                $(".progress-bar").attr('style','width: calc(100/12*'+num+'%)')
+                // #title : id를 나타냄, .html() : html 안에 있는 ()내용을 바꿈 
+                $("#title").html(q[num]["title"]);
+                $("#type").val(q[num]["type"]);
+                $("#A").html(q[num]["A"]);
+                $("#B").html(q[num]["B"]);
+                num++;
             }
-            $(".progress-bar").attr('style','width: calc(100/12*'+num+'%)')
-            // #title : id를 나타냄, .html() : html 안에 있는 ()내용을 바꿈 
-            $("#title").html(q[num]["title"]);
-            $("#type").val(q[num]["type"]);
-            $("#A").html(q[num]["A"]);
-            $("#B").html(q[num]["B"]);
-            num++;
-        
         }
     </script>
 </body>
